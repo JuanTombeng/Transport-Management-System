@@ -1,0 +1,108 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    {% if driverscheduleavalability.Schedule_Status is True %}
+        <h2 class="text-center">Driver Schedule</h2><br><br>
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Id</th>
+                                <th>Driver Staff</th>
+                                <th>Destination ID</th>
+                                <th>Vehicle</th>
+                                <th>Departure Date & Time</th>
+                                <th>Trip Hours Duration</th>
+                                <th>Return Date & Time</th>
+                            </tr>
+                            <tr>
+                                <td>{{driverscheduleavalability.id}}</td>
+                                <td>{{driverscheduleavalability.Driver_Staff_ID}}</td>
+                                <td>{{driverscheduleavalability.destination_id}}</td>
+                                <td>{{driverscheduleavalability.Vehicle_Plate_Number.plateNumber}}</td>
+                                <td>{{driverscheduleavalability.Departure_Date_Time}}</td>
+                                <td>{{driverscheduleavalability.tripHoursDuration}}</td>
+                                <td>{{driverscheduleavalability.Return_Date_Time}}</td>
+
+                            </tr>
+
+                    </table>
+                    <br>
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Number Of Seat</th>
+                                <th>Remaining Seat</th>
+                                <th>Passenger Status</th>
+                                <th>Update</th>
+                            </tr>
+                            <tr>
+                                <td>{{driverscheduleavalability.Number_of_Seat}}</td>
+                                <td>{{driverscheduleavalability.Remaining_Seat}}</td>
+                                <td>{{driverscheduleavalability.Schedule_Status}}</td>
+                                <td><a class="btn btn-sm btn-warning" href="{% url 'admin-driver-schedule-update' driverscheduleavalability.id %}">UPDATE</a></td>
+{#                                <td><a class="btn btn-sm btn-danger" href="{% url 'admin-driver-schedule-status-update' driverscheduleavalability.id %}">DISABLE</a></td>#}
+{#                                <td><a class="btn btn-sm btn-danger" href="{% url 'admin-driver-schedule-delete' driverscheduleavalability.id %}">DELETE</a></td>#}
+                            </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% else %}
+        <h2 class="text-center">Driver Schedule</h2><br><br>
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Id</th>
+                                <th>Driver Staff</th>
+                                <th>Destination ID</th>
+                                <th>Vehicle</th>
+                                <th>Departure Date & Time</th>
+                                <th>Trip Hours Duration</th>
+                                <th>Return Date & Time</th>
+                            </tr>
+                            <tr>
+                                <td>{{driverscheduleavalability.id}}</td>
+                                <td>{{driverscheduleavalability.Driver_Staff_ID}}</td>
+                                <td>{{driverscheduleavalability.destination_id}}</td>
+                                <td>{{driverscheduleavalability.Vehicle_Plate_Number.plateNumber}}</td>
+                                <td>{{driverscheduleavalability.Departure_Date_Time}}</td>
+                                <td>{{driverscheduleavalability.tripHoursDuration}}</td>
+                                <td>{{driverscheduleavalability.Return_Date_Time}}</td>
+{#                                <td><a class="btn btn-sm btn-info" href="{% url 'admin-driver-schedule-update' driverscheduleavailabilitiy.id %}">VIEW</a></td>#}
+{#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-update' booking.payments.booking_id %}">PAY</a></td>#}
+                            </tr>
+
+                    </table>
+                    <br>
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Number Of Seat</th>
+                                <th>Remaining Seat</th>
+                                <th>Passenger Status</th>
+                                <th>Update</th>
+                                <th>Update Status</th>
+{#                                <th>Delete</th>#}
+                            </tr>
+                            <tr>
+                                <td>{{driverscheduleavalability.Number_of_Seat}}</td>
+                                <td>{{driverscheduleavalability.Remaining_Seat}}</td>
+                                <td>{{driverscheduleavalability.Schedule_Status}}</td>
+                                <td><a class="btn btn-sm btn-warning" href="{% url 'admin-driver-schedule-update' driverscheduleavalability.id %}">UPDATE</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'admin-driver-schedule-delete' driverscheduleavalability.id %}">DELETE</a></td>
+{#                                <td><a class="btn btn-sm btn-danger" href="{% url 'admin-driver-schedule-delete' driverscheduleavalability.id %}">DELETE</a></td>#}
+                            </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+        <h2 class="text-center">Station Location Details</h2>
+        <hr style="height:5px">
+            <h4>Station Location: {{ stationlocation.id }}</h4>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm text-center">
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tr>
+                                <td>{{stationlocation.Station_Name}}</td>
+                                <td>{{stationlocation.Station_Address}}</td>
+                                <td><a class="btn btn-sm btn-warning" href="{% url 'admin-station-location-update' stationlocation.id %}">UPDATE</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'admin-station-location-delete' stationlocation.id %}">DELETE</a></td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+

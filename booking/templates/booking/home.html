@@ -1,0 +1,20 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+{% load static %}
+{% block content %}
+    <h2 class="text-center">LOOKING FOR A TRIP?</h2>
+    <hr>
+    <br>
+    <form class="needs-validation" method=POST action="{% url 'search-schedules' %}">
+        <h5 class="text-center">Type your Destination City</h5>
+        <div class="input-group rounded">
+            {% csrf_token %}
+            <input type="search" class="form-control rounded" name="searched" placeholder="Destination City" aria-label="Search"
+            aria-describedby="search-addon"/>
+{#            <input type="datetime-local" class="form-control rounded" name="datetimesearch" placeholder="Departure Date" aria-label="Search"#}
+{#            aria-describedby="search-addon"/>#}
+        <button class="btn btn-info" type="submit">Search</button>
+        </div>
+    </form>
+
+{% endblock %}

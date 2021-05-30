@@ -1,0 +1,122 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    {% if user.is_authenticated%}
+
+        <h2 class="text-center">Schedule Details</h2>
+        <hr style="height:5px">
+
+            <h4>Destination: {{ driverscheduleavailability.destination_id.Destination_Name }}</h4>
+            <h4>Trip ID: {{ driverscheduleavailability.id }}</h4>
+            <br>
+            <div class="row text-center">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Departure</th>
+                                <th>Departure Date and Time</th>
+                                <th>Station Location</th>
+                                <th>Price per Kilometer</th>
+                                <th>Available Seat</th>
+                                <th>Total Price</th>
+                                <th>Remaining Seats</th>
+                            </tr>
+                            <tr>
+                                <td>{{driverscheduleavailability.destination_id.Departure_City}}</td>
+                                <td>{{driverscheduleavailability.Departure_Date_Time}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Station_Location_Name}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Destination_Price_Per_KiloMeter}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Destination_Final_Price}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Destination_Final_Price}}</td>
+                                <td>{{driverscheduleavailability.Remaining_Seat}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <form action="{% url 'booking-create' %}" method="post">
+                <h3 class="text-center">Booking Form</h3>
+                <hr>
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Trip ID:</label>
+                        <input name='schedule_id' class="form-control" type="number" placeholder="See above the schedule detail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Number of Passenger:</label>
+                        <input name='no_pass' class="form-control" type="number" placeholder="Number of passenger">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Number of Luggage:</label>
+                        <input name='no_lug' class="form-control" type="number" placeholder="Type '0' if you have no luggage">
+                    </div>
+                </div>
+                <div class="form-row">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Special Condition:</label>
+                        <input name='special_con' class="form-control" type="text" placeholder="Specify your trip special condition">
+                    </div>
+                </div>
+                <br>
+                <div class="text-center">
+                    <p class="text-center">Note: Medium to Large size of a Luggage is consider as 1 person seat</p>
+                    <br>
+                    <button type="submit" class="btn btn-info btn-lg">Book Trip</button>
+                </div>
+                <br><br>
+                <hr>
+
+                {{error}}
+
+            </form>
+
+    {% elif user != user.is_authenticated %}
+        <h2 class="text-center">Schedule Details</h2>
+        <hr style="height:5px">
+
+            <h3>Destination: {{ driverscheduleavailability.destination_id.Destination_Name }}</h3>
+            <h4>Trip ID: {{ driverscheduleavailability.destination_id }}</h4>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Departure</th>
+                                <th>Departure Date and Time</th>
+                                <th>Station Location</th>
+                                <th>Price per Kilometer</th>
+                                <th>Available Seat</th>
+                                <th>Total Price</th>
+                                <th>Remaining Seats</th>
+                            </tr>
+                            <tr>
+                                <td>{{driverscheduleavailability.destination_id.Departure_City}}</td>
+                                <td>{{driverscheduleavailability.Departure_Date_Time}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Station_Location_Name}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Destination_Price_Per_KiloMeter}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Destination_Final_Price}}</td>
+                                <td>{{driverscheduleavailability.destination_id.Destination_Final_Price}}</td>
+                                <td>{{driverscheduleavailability.Remaining_Seat}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+    {% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends "booking/base.html" %}
+{% load crispy_forms_tags %}
+{% load bootstrap %}
+{% block content %}
+    <h4 class="text-center">Payment ID: {{ payments.id }}</h4>
+    <h4 class="text-center">{{ payments.booking_id }}</h4><br><hr>
+    <h4 class="text-center">TMS Bank Name & Account: 123-456-789</h4><br><br>
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 text-center">Payment Form</legend>
+                 {{ form|bootstrap }}
+                <br>
+                <h6>*Please provide the Transaction Receipt if your payment method is Bank Transfer.</h6>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-info" type="submit">Pay</button>
+{#                <a class="btn btn-sm btn-info" href="{% url 'payment-detail' %}">Pay</a>#}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

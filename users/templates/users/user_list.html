@@ -1,0 +1,56 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    <h3 class="text-center">Search Account</h3><br>
+
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {{ accountFilter.form|bootstrap}}
+
+                    <button class="btn btn-info float-right" type="submit">Search</button>
+{#                    <a class="btn btn-primary" href="{% url 'destinations-list' %}" role="button">Link</a>#}
+                </form>
+            </div>
+        </div>
+    </div><br><hr>
+    <h3 class="text-center">All Accounts</h3><br>
+    {% for account in accounts %}
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card card-body">
+                    <h4 class="text-center">User ID: {{ account.id }}</h4>
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>View</th>
+                            </tr>
+                            <tr>
+                                <td>{{account.name}}</td>
+                                <td>{{account.email}}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'admin_user_detail' account.id %}">VIEW</a></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    {% endfor %}
+{% endblock %}

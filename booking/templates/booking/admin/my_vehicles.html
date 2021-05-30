@@ -1,0 +1,48 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    <h3 class="text-center">Search Vehicle</h3><br>
+
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{ vehicleFilter.form|bootstrap}}
+
+                    <button class="btn btn-info float-right" type="submit">Search</button>
+{#                    <a class="btn btn-primary" href="{% url 'destinations-list' %}" role="button">Link</a>#}
+                </form>
+            </div>
+        </div>
+    </div><br><hr>
+
+<h3 class="text-center">All Vehicles</h3><br>
+    {% for vehicle in vehicles %}
+        <div class="row text-center">
+            <div class="col-md">
+
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Type</th>
+                                <th>Plate Number</th>
+                                <th>View</th>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>{{vehicle.type}}</td>
+                                <td>{{vehicle.plateNumber}}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'admin-vehicle-detail' vehicle.id %}">VIEW</a></td>
+{#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-update' booking.payments.booking_id %}">PAY</a></td>#}
+                            </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

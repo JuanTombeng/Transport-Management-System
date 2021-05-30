@@ -1,0 +1,36 @@
+{% extends "booking/base.html" %}
+{% load crispy_forms_tags %}
+{% load bootstrap %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title text-center">LOG IN PAGE</h4>
+    <form method="post">
+      {% csrf_token %}
+        {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+      <input type="hidden" name="next" value="{{ next }}">{{ form|bootstrap }}<button type="submit"
+        class="btn btn-info btn-block">LOG IN</button>
+    </form>
+  </div>
+  <div class="card-footer">
+      <a class="btn btn-info btn-block" href="{% url 'password_reset' %}">Forget Password</a>
+{#    New user? <a href="{% url "user_registration" %}?next={{ next }}">create new account</a>#}
+  </div>
+</div>
+
+{% endblock %}

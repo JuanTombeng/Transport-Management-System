@@ -1,0 +1,42 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    <h2 class="text-center">Your Canceled Bookings</h2>
+    <hr style="height:5px">
+
+
+    <br>
+    {% for payment in payments %}
+        {% if payment.booking_id.Customer == request.user and payment.Cancellation_Confirmation_Status == 'Confirmed'%}
+            <div class="row text-center">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <h5>{{ payment.booking_id.Available_Trips.destination_id.Destination_Name }}</h5>
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Payment ID</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr>
+                                <td>{{payment.booking_id}}</td>
+                                <td>{{payment.PaymentID}}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'canceled-booking-detail' payment.PaymentID %}">VIEW</a></td>
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-detail' payment.PaymentID %}">VIEW</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-warning" href="{% url 'payment-update' payment.PaymentID %}">UPDATE</a></td>#}
+    {#                                <td>{{booking.Available_Trips.destination_id.Destination_City}}</td>#}
+    {#                                <td>{{booking.Booking_Number_Of_Passengers}}</td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'booking-detail' booking.id %}">VIEW</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-update' booking.payments.booking_id %}">PAY</a></td>#}
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

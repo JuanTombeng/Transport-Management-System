@@ -1,0 +1,17 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+<div class="container">
+
+        <form>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 text-center">You booking is in process!</legend>
+                <legend class="border-bottom mb-4 text-center">Please continue the payment process.</legend>
+            </fieldset>
+            <div class="form text-center">
+                <a class="btn btn-info text-center" href="{% url 'booking-to-payment' %}">Payment</a>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    <h2 class="text-center">Your Bookings</h2>
+    <hr style="height:5px">
+
+
+    <br>
+    {% for payment in payments %}
+        {% if payment.booking_id.Customer == request.user and payment.Cancellation_Confirmation_Status == 'Not Cancel' and payment.paymentConfirmationStatus == 'Unpaid'%}
+            <div class="row text-center">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Payment ID</th>
+                                <th>Payment Status</th>
+                                <th>Details</th>
+                                <th>Cancel</th>
+                            </tr>
+                            <tr>
+                                <td>{{payment.booking_id}}</td>
+                                <td>{{payment.PaymentID}}</td>
+                                <td>{{ payment.paymentConfirmationStatus }}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-detail' payment.PaymentID %}">VIEW</a></td>
+                                <td><a class="btn btn-sm btn-danger" type="submit"
+                                           href="{% url 'booking-status-update' payment.PaymentID %}">Cancel</a></td>
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-detail' payment.PaymentID %}">VIEW</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-warning" href="{% url 'payment-update' payment.PaymentID %}">UPDATE</a></td>#}
+    {#                                <td>{{booking.Available_Trips.destination_id.Destination_City}}</td>#}
+    {#                                <td>{{booking.Booking_Number_Of_Passengers}}</td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'booking-detail' booking.id %}">VIEW</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-update' booking.payments.booking_id %}">PAY</a></td>#}
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% elif payment.booking_id.Customer == request.user and payment.Cancellation_Confirmation_Status == 'Not Cancel' and payment.paymentConfirmationStatus == 'Fully Paid'%}
+            <div class="row text-center">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Payment ID</th>
+                                <th>Payment Status</th>
+                                <th>Details</th>
+                            </tr>
+                            <tr>
+                                <td>{{payment.booking_id}}</td>
+                                <td>{{payment.PaymentID}}</td>
+                                <td>{{ payment.paymentConfirmationStatus }}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-detail' payment.PaymentID %}">VIEW</a></td>
+{#                                <td><a class="btn btn-sm btn-danger" type="submit"#}
+{#                                           href="{% url 'booking-status-update' payment.PaymentID %}">Cancel</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-detail' payment.PaymentID %}">VIEW</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-warning" href="{% url 'payment-update' payment.PaymentID %}">UPDATE</a></td>#}
+    {#                                <td>{{booking.Available_Trips.destination_id.Destination_City}}</td>#}
+    {#                                <td>{{booking.Booking_Number_Of_Passengers}}</td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'booking-detail' booking.id %}">VIEW</a></td>#}
+    {#                                <td><a class="btn btn-sm btn-info" href="{% url 'payment-update' booking.payments.booking_id %}">PAY</a></td>#}
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

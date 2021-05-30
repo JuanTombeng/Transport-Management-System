@@ -1,0 +1,35 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    <h2 class="text-center">All Bookings</h2><br><br>
+    {% for booking in bookings %}
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                                <th>Booking ID</th>
+                                <th>Departure City</th>
+                                <th>Destination City</th>
+                                <th>Number of Passenger</th>
+                                <th>Detail</th>
+{#                                <th>Delete</th>#}
+                            </tr>
+
+                            <tr>
+                                <td>{{booking.id}}</td>
+                                <td>{{booking.Available_Trips.destination_id.Departure_City}}</td>
+                                <td>{{booking.Available_Trips.destination_id.Destination_City}}</td>
+                                <td>{{booking.Booking_Number_Of_Passengers}}</td>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'admin-booking-detail' booking.id %}">VIEW</a></td>
+{#                                <td><a class="btn btn-sm btn-warning" href="{% url 'admin-booking-update' booking.id %}">Update</a></td>#}
+                            </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

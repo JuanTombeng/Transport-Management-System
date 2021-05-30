@@ -1,0 +1,69 @@
+{% extends "booking/base.html" %}
+{% block content %}
+{#    <div class="content-section">#}
+{#        <form method="POST">#}
+{#            {% csrf_token %}#}
+{#            <fieldset class="form-group">#}
+{#                <legend class="border-bottom mb-4">Booking Form</legend>#}
+{#                {{ form|crispy }}#}
+{#            </fieldset>#}
+{#            <div class="form-group">#}
+{#                <button class="btn btn-outline-info" type="submit">Book</button>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+
+
+
+
+
+
+
+
+
+
+
+<form action="{% url 'booking-create' %}" method="post">
+    <h3 class="text-center">Booking Form</h3>
+    <hr>
+    <br>
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="example-email-input" >Trip ID</label>
+            <input name='schedule_id' class="form-control" type="number" placeholder="Trip ID">
+        </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div class="col">
+            <label for="example-email-input">Number of Passenger</label>
+            <input name='no_pass' class="form-control" type="number">
+        </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div class="col">
+            <label>Number of Luggage</label>
+            <input name='no_lug' class="form-control" type="number">
+        </div>
+    </div>
+    <br>
+    <p>Please</p>
+    <div class="form-row">
+        <div class="col">
+            <label for="example-email-input">Special Condition</label>
+            <input name='special_con' class="form-control" type="text">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary float-left">Book Trip</button>
+    </div>
+
+
+    {{error}}
+
+</form>
+{% endblock content %}

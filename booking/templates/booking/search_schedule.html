@@ -1,0 +1,46 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+{% block content %}
+
+    {% if searched %}
+        <h2 class="text-center">Search Result for:  "{{ searched }}"</h2>
+        <br>
+
+{#            <h3 class="text-center">Search Destination</h3><br>#}
+{#            <div class="row">#}
+{#                <div class="col">#}
+{#                    <div class="card card-body">#}
+{#                        <form method="get">#}
+{#                            {{ searchScheduleFilter.form|bootstrap}}#}
+{##}
+{#                            <button class="btn btn-info float-right" type="submit">Search</button>#}
+{#                            <a class="btn btn-primary" href="{% url 'destinations-list' %}" role="button">Link</a>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div><br><hr>#}
+
+            {% for schedule in schedules %}
+                <div class="container">
+                  <div class="card-deck mb-1 text-center">
+                    <div class="card mb-4 box-shadow">
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">{{schedule.destination_id.Destination_Name}}</h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Departure: {{schedule.destination_id.Departure_City}}</li>
+                            <li>Departure Date: {{schedule.Departure_Date_Time}}</li>
+                            <li>Remaining Seats: {{ schedule.Remaining_Seat }}</li>
+                        </ul>
+                          <a class="btn btn-lg btn-block btn-info" href="{% url 'schedule-detail' schedule.id %}">Details</a>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            {% endfor %}
+    {% else %}
+        <h2>You forgot to search.</h2>
+    {% endif %}
+
+
+{% endblock %}

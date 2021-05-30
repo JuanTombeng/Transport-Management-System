@@ -1,0 +1,41 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+        <h2 class="text-center">User Details</h2>
+        <hr style="height:5px">
+            <h4>User ID: {{ account.id }}</h4>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">{{ account.name }}</h4>
+                            <tr>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Date of Birth</th>
+                                <th>Staff Status</th>
+                                <th>Active Status</th>
+                                <th>Group</th>
+                                <th>View</th>
+                                <th>Delete</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{account.email}}</td>
+                                <td>{{account.phone}}</td>
+                                <td>{{account.date_of_birth}}</td>
+                                <td>{{account.is_staff}}</td>
+                                <td>{{account.is_active}}</td>
+                                <td>{{account.groups.name}}</td>
+                                <td><a class="btn btn-sm btn-warning" href="{% url 'admin_user_update' account.id %}">UPDATE</a></td>
+                                <td><a class="btn btn-sm btn-danger" href="{% url 'admin_user_delete' account.id %}">DELETE</a></td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+

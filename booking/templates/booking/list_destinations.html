@@ -1,0 +1,69 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    <h2 class="text-center">Welcome to TMS</h2>
+    <hr style="height:5px">
+
+    <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {{ myFilter.form|bootstrap}}
+
+                    <button class="btn btn-info float-right" type="submit">Search</button>
+{#                    <a class="btn btn-primary" href="{% url 'destinations-list' %}" role="button">Link</a>#}
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    {% for destination in destinations %}
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Destination Name</th>
+                            <th>Destination City</th>
+                            <th>Departure City</th>
+                            <th>Price per Kilometer</th>
+                            <th>Final Price</th>
+                            <th>Station Name</th>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>{{destination.Destination_Name}}</td>
+                            <td>{{destination.Destination_City}}</td>
+                            <td>{{destination.Departure_City}}</td>
+                            <td>{{destination.Destination_Price_Per_KiloMeter}}</td>
+                            <td>{{destination.Destination_Final_Price}}</td>
+                            <td>{{destination.Station_Location_Name}}</td>
+                            <td>{{destination.S}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% endblock %}

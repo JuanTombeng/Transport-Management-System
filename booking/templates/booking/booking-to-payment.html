@@ -1,0 +1,37 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    <h2 class="text-center">Booking Confirmation</h2>
+    <hr style="height:5px">
+
+
+    <br>
+    {% for payment in payments %}
+        {% if payment.booking_id.Customer == request.user and payment.paymentMethod == Null and payment.Cancellation_Confirmation_Status == 'Not Cancel' %}
+                <div class="row text-center">
+                    <div class="col-md">
+                        <div class="jumbotron">
+                            <p class="lead">{{payment.booking_id}}</p>
+                            <p class="lead">Payment ID: {{payment.PaymentID}}</p>
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>Details</th>
+                                    <th>Payment</th>
+                                </tr>
+                                <tr>
+                                    <td><a class="btn btn-sm btn-info"
+                                           href="{% url 'payment-detail' payment.PaymentID %}">VIEW</a></td>
+                                    <td><a class="btn btn-sm btn-warning" type="submit"
+                                           href="{% url 'payment-update' payment.PaymentID %}">UPDATE</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+

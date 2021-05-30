@@ -1,0 +1,163 @@
+{% extends "booking/base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    {% if payment.paymentMethod == 'Bank Transfer' %}
+        <h2 class="text-center">Payment Details</h2>
+        <hr style="height:5px">
+            <h3>Customer: {{ payment.booking_id.Customer.name }}</h3>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">{{ payment.booking_id }}</h4>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Departure Date</th>
+                                <th>Station Location</th>
+                                <th>Total Price</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Destination_Name}}</td>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Departure_City}}</td>
+                                <td>{{payment.booking_id.Available_Trips.Departure_Date_Time}}</td>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Station_Location_Name}}</td>
+                                <td>{{payment.booking_id.Booking_Total_Price}}</td>
+    {#                            <td></td>#}
+                            </tr>
+                        </table>
+                        <br><hr><br>
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">Payment ID: {{ payment.PaymentID }}</h4>
+                            <tr>
+                                <th>Payment Method</th>
+                                <th>Payment Status</th>
+                                <th>Booking Status</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{payment.paymentMethod}}</td>
+                                <td>{{payment.paymentConfirmationStatus}}</td>
+                                <td>{{payment.Cancellation_Confirmation_Status}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                        <table class="table table-sm text-center">
+                            <tr>
+                                <th>Booking Receipt</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td><img src="{{payment.paymentReceiptPicture.url}}" alt="Receipt Picture" width="500" height="500"></td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    {% elif payment.paymentMethod == 'Personal Account' %}
+        <h2 class="text-center">Payment Details</h2>
+        <hr style="height:5px">
+            <h3>Customer: {{ payment.booking_id.Customer.first_name }}</h3>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">{{ payment.booking_id }}</h4>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Departure Date</th>
+                                <th>Station Location</th>
+                                <th>Total Price</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Destination_Name}}</td>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Departure_City}}</td>
+                                <td>{{payment.booking_id.Available_Trips.Departure_Date_Time}}</td>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Station_Location_Name}}</td>
+                                <td>{{payment.booking_id.Booking_Total_Price}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+                        </table>
+                        <br><hr><br>
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">Payment ID: {{ payment.PaymentID }}</h4>
+                            <tr>
+                                <th>Payment Method</th>
+                                <th>Payment Status</th>
+                                <th>Booking Status</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{payment.paymentMethod}}</td>
+                                <td>{{payment.paymentConfirmationStatus}}</td>
+                                <td>{{payment.Cancellation_Confirmation_Status}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+    {% elif payment.paymentMethod == None %}
+        <h2 class="text-center">Payment Details</h2>
+        <hr style="height:5px">
+            <h3>Customer: {{ payment.booking_id.Customer.first_name }}</h3>
+            <br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="jumbotron">
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">{{ payment.booking_id }}</h4>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Departure Date</th>
+                                <th>Station Location</th>
+                                <th>Total Price</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Destination_Name}}</td>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Departure_City}}</td>
+                                <td>{{payment.booking_id.Available_Trips.Departure_Date_Time}}</td>
+                                <td>{{payment.booking_id.Available_Trips.destination_id.Station_Location_Name}}</td>
+                                <td>{{payment.booking_id.Booking_Total_Price}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+                        </table>
+                        <br><hr><br>
+                        <table class="table table-sm text-center">
+                            <h4 class="text-center">Payment ID: {{ payment.PaymentID }}</h4>
+                            <tr>
+                                <th>Payment Method</th>
+                                <th>Payment Status</th>
+                                <th>Booking Status</th>
+                            </tr>
+                            <hr>
+                            <tr>
+                                <td>{{payment.paymentMethod}}</td>
+                                <td>{{payment.paymentConfirmationStatus}}</td>
+                                <td>{{payment.Cancellation_Confirmation_Status}}</td>
+    {#                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>#}
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+    {% endif %}
+
+
+{% endblock %}
+

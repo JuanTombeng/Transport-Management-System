@@ -1,0 +1,9 @@
+{% extends "booking/base.html" %}
+{% block content %}
+    <h2 class="text-center">You have been logged out from TMS</h2>
+    <div class="border-top pt-3 text-center">
+        <div class="form-group">
+            <a class="btn btn-outline-info" href="{% url 'login' %}">Log In Again</a>
+        </div>
+    </div>
+{% endblock content %}

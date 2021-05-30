@@ -1,0 +1,41 @@
+{% extends "booking/base.html" %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row text-center">
+	<div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+                Destination Section
+          </div>
+          <div class="card-body">
+            <h4>Are you sure you want to delete Destination with ID: {{destination.id}} ?</h4><br>
+                <p>Destination Name: {{ destination.Destination_Name }}</p>
+                <p>Departure City: {{ destination.Departure_City }}</p>
+                <p>Station Location Name: {{ destination.Station_Location_Name }}</p>
+              <form action="{% url 'admin-destination-delete' destination.id %}" method="POST">
+				{% csrf_token %}
+                  {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+				<a class="btn btn-warning" href="{% url 'admin-my-destination' %}">Cancel</a>
+				<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
+          </div>
+        </div>
+	</div>
+</div>
+
+{% endblock %}

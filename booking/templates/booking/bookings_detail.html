@@ -1,0 +1,39 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+
+    <h2 class="text-center">Booking Details</h2>
+    <hr style="height:5px">
+
+        <h3>Booking Number: {{ booking.id }}</h3>
+        <br>
+        <div class="row text-center">
+            <div class="col-md">
+                <div class="card card-body">
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Destination Name</th>
+                            <th>Destination City</th>
+                            <th>Departure City</th>
+                            <th>Departure Date</th>
+                            <th>Departure Time</th>
+                            <th>Station Name</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>{{booking.Available_Trips.destination_id.Destination_Name}}</td>
+                            <td>{{booking.Available_Trips.destination_id.Destination_City}}</td>
+                            <td>{{booking.Available_Trips.Departure_Date}}</td>
+                            <td>{{booking.Available_Trips.Departure_Time}}</td>
+                            <td>{{booking.Available_Trips.destination_id.Station_Location_Name}}</td>
+                            <td>{{booking.Booking_Total_Price}}</td>
+                            <td><a class="btn btn-sm btn-warning" href="{% url 'booking-update' booking.id %}">UPDATE</a></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
+
