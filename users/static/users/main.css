@@ -16,12 +16,16 @@ ul {
   background-color: #5f788a;
 }
 
+.container {
+  background: #006da8;
+}
+
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+  color: black;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color: black;
 }
 
 .site-header .navbar-nav .nav-link.active {

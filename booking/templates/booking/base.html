@@ -15,153 +15,123 @@
 
     <link rel="stylesheet" href="jquery.datetimepicker.min.css">
 
-    <script src="jquery.js"></script>
-    <script src="jquery.datetimepicker.full.js"></script>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-    <!-- XDSoft DateTimePicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
-    {% if title %}
-        <title>TMS Dashboard - {{ title }}</title>
-    {% else %}
-        <title>TMS Dashboard</title>
-    {% endif %}
+    <title>TMS Dashboard</title>
 </head>
 <body>
-        <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-        <div class="container">
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+            <div class="container">
 
-            <a class="navbar-brand mr-4" href="{% url 'home' %}">TMS Dashboard</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <div class="navbar-nav mr-auto">
-                        {% if user.is_authenticated and user.is_superuser and request.user.groups.name == 'Administration' %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                  Vehicle
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{% url 'admin-my-vehicle' %}">List</a>
-                                  <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'admin-vehicle-create' %}">Create</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                  Station Location
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{% url 'admin-my-station-location' %}">List</a>
-                                  <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'admin-station-location-create' %}">Create</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                  Destination
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{% url 'admin-my-destination' %}">List</a>
-                                  <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'admin-destination-create' %}">Create</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                  Driver Schedule
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{% url 'admin-my-driver-schedule' %}">List</a>
-                                  <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'admin-driver-schedule-create' %}">Create</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                  Booking
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{% url 'admin-my-booking' %}">List</a>
-                                  <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'admin-booking-create' %}">Create</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                  User
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'admin_user_list' %}">List</a>
-                                    <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{% url 'admin_user_registration' %}">Create</a>
-                                </div>
-                            </li>
-                        {% elif user.is_authenticated and user.is_staff and request.user.groups.name == 'Driver Department' %}
-                            <a class="nav-item nav-link" href="{% url 'my-driver-schedule' %}">My Schedule</a>
-                            <a class="nav-item nav-link" href="{% url 'destinations' %}">Destinations</a>
-                        {% elif user.is_authenticated and user.is_staff and request.user.groups.name == 'Finance Department' %}
-                            <a class="nav-item nav-link" href="{% url 'my-financier-payment' %}">Booking Payment</a>
-                            <a class="nav-item nav-link" href="{% url 'destinations' %}">Destinations</a>
-                        {% elif user.is_authenticated %}
-                            <a class="nav-item nav-link" href="{% url 'my-payment' %}">My Bookings</a>
-                            <a class="nav-item nav-link" href="{% url 'my-canceled-booking' %}">My Canceled Bookings</a>
-                            <a class="nav-item nav-link" href="{% url 'destinations' %}">Destinations</a>
-                        {% elif user != user.is_authenticated%}
-                            <a class="nav-item nav-link" href="{% url 'about-us' %}">About Us</a>
-                        {% endif %}
-                    </div>
-                    <!-- Navbar Right Side -->
-                    <div class="navbar-nav">
-                    <div class="navbar-nav">
-                        {% if user.is_authenticated %}
-                            <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.name }}'s Profile</a>
-                            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                        {% else %}
-                            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                            <a class="nav-item nav-link" href="{% url 'user_registration' %}">Register</a>
-                        {% endif %}
+                <a class="navbar-brand mr-4" href="{% url 'home' %}">TMS Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                    <div class="collapse navbar-collapse" id="navbarToggle">
+                        <div class="navbar-nav mr-auto">
+                            {% if user.is_authenticated and user.is_superuser and request.user.groups.name == 'Administration' %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                      Vehicle
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'admin-my-vehicle' %}">List</a>
+                                      <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'admin-vehicle-create' %}">Create</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                      Station Location
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'admin-my-station-location' %}">List</a>
+                                      <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'admin-station-location-create' %}">Create</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                      Destination
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'admin-my-destination' %}">List</a>
+                                      <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'admin-destination-create' %}">Create</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                      Driver Schedule
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'admin-my-driver-schedule' %}">List</a>
+                                      <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'admin-driver-schedule-create' %}">Create</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                      Booking
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="{% url 'admin-my-booking' %}">List</a>
+                                      <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'admin-booking-create' %}">Create</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                      User
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'admin_user_list' %}">List</a>
+                                        <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url 'admin_user_registration' %}">Create</a>
+                                    </div>
+                                </li>
+                            {% elif user.is_authenticated and user.is_staff and request.user.groups.name == 'Driver Department' %}
+                                <a class="nav-item nav-link" href="{% url 'my-driver-schedule' %}">My Schedule</a>
+                                <a class="nav-item nav-link" href="{% url 'destinations' %}">Destinations</a>
+                            {% elif user.is_authenticated and user.is_staff and request.user.groups.name == 'Finance Department' %}
+                                <a class="nav-item nav-link" href="{% url 'my-financier-payment' %}">Booking Payment</a>
+                                <a class="nav-item nav-link" href="{% url 'destinations' %}">Destinations</a>
+                            {% elif user.is_authenticated %}
+                                <a class="nav-item nav-link" href="{% url 'my-payment' %}">My Bookings</a>
+                                <a class="nav-item nav-link" href="{% url 'my-canceled-booking' %}">My Canceled Bookings</a>
+                                <a class="nav-item nav-link" href="{% url 'destinations' %}">Destinations</a>
+                            {% elif user != user.is_authenticated%}
+                                <a class="nav-item nav-link" href="{% url 'about-us' %}">About Us</a>
+                            {% endif %}
+                        </div>
+                        <!-- Navbar Right Side -->
+                        <div class="navbar-nav">
+                        <div class="navbar-nav">
+                            {% if user.is_authenticated %}
+                                <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.name }}'s Profile</a>
+                                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                                <a class="nav-item nav-link" href="{% url 'user_registration' %}">Register</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-        </div>
-      </nav>
+            </div>
+        </nav>
     </header>
     <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-          {% block content %}{% endblock %}
+        <div class="row">
+            <div class="col-sm">
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+              {% block content %}{% endblock %}
+            </div>
         </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h4 class="text-center">TMS Contact Information</h4>
-            <p class='text-muted text-center'>Please Contact Us through this:
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light" style="font-size:15px"><i class="fas fa-phone fa-2x"></i> +66-94-345-4778</li>
-              <li class="list-group-item list-group-item-light" style="font-size:15px"><i class="fab fa-facebook fa-2x"></i> TMS.company</li>
-                <li class="list-group-item list-group-item-light" style="font-size:15px"><i class="fab fa-line fa-2x"></i> @TMS.LINE</li>
-              </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-
-
-
     </main>
 
 
